@@ -1,0 +1,21 @@
+#main-header {
+  text-align: center;
+}
+#customer-input {
+  display: block;
+  width: 30%;
+  float: left;
+  padding: 10px;
+}
+#output-table {
+  display: block;
+  width: 70%;
+  float: left;
+  padding: 10px;
+}
+#adress {
+  padding-left: 10px;
+}
+#info {
+  display: block;
+}

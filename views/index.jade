@@ -1,0 +1,49 @@
+extends layout
+
+block content
+    div(ng-app="App" ng-controller="AppController")
+        h1#main-header Customer base
+        
+        div#customer-input
+            h2 Input form
+            form(name="inputForm")
+                div.form-group
+                    label(for="inputName") *Name
+                    input.form-control#inputName(type="text" placeholder="Enter name" ng-model="customer.name" required)
+                div.form-group
+                    label(for="inputPhone") *Phone
+                    input.form-control#inputName(type="number" placeholder="Enter phone" ng-model="customer.phone" required)
+                div.form-group
+                    label(for="inputEmail") *Email
+                    input.form-control#inputName(type="email" placeholder="Enter email" ng-model="customer.email" required)
+                h4 Adress
+                div.form-group#adress
+                    label(for="inputStreet") Street
+                    input.form-control#inputName(type="text" placeholder="Enter street" ng-model="customer.adress.street")
+                    label(for="inputCity") City
+                    input.form-control#inputName(type="text" placeholder="Enter city" ng-model="customer.adress.city")
+                    label(for="inputState") State
+                    input.form-control#inputName(type="text" placeholder="Enter state" ng-model="customer.adress.state")
+                    label(for="inputZip") Zip
+                    input.form-control#inputName(type="number" placeholder="Enter zip" ng-model="customer.adress.zip")
+            span.label.label-default#info * - required fields
+            button.btn.btn-default(ng-click="add()" ng-disabled="inputForm.$invalid") Save
+        div#output-table
+            h2 Cutomer list
+            table.table.table-striped
+                tr
+                    th ID
+                    th Name
+                    th Phone
+                    th Email
+                    th Adress
+                    th Action
+                tr(ng-repeat="one in customers | orderBy:'id' track by $index ")
+                    td {{one.id}}
+                    td {{one.name}}
+                    td {{one.phone}}
+                    td {{one.email}}
+                    td {{one.adress.state + ", " + one.adress.city + ", " +one.adress.street + ", " +one.adress.zip}}
+                    td
+                        button.btn.btn-default(ng-click="delete(one)") Delete
+                        button.btn.btn-default(ng-click="edit(one)") Edit
