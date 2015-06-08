@@ -10,17 +10,14 @@ myApp.controller('AppController', ['$scope', '$http',function ($scope, $http) {
     
     $http.get('/all').
         success(function(data, status, headers, config) {
-            console.log(data);
             data.forEach(function(v,i,a){a[i] = JSON.parse(v);})
             data.forEach(function(v,i,a){
                 if(v.id > id) id = v.id;
                 ;})
             $scope.customers = data;
-            console.log(data);
     });
     
     $scope.add = function () {
-        console.log($scope.customer);
         if(!$scope.editing) {
             id++;
             $scope.customer.id = id;
@@ -39,6 +36,7 @@ myApp.controller('AppController', ['$scope', '$http',function ($scope, $http) {
     };
     
     $scope.delete = function(one) {
+        
         var index = $scope.customers.indexOf(one);
         $scope.customers.splice(index, 1);
         console.log(one.id);
@@ -53,24 +51,17 @@ myApp.controller('AppController', ['$scope', '$http',function ($scope, $http) {
     }
     
     $scope.edit = function(one) {
-        $scope.editing = true;
         $scope.customer = one;
+        $scope.editing = true;
         var index = $scope.customers.indexOf(one);
         $scope.customers.splice(index, 1);
-        console.log(one.id);
     }
     
-    $scope.phoneNumberPattern = (function() {
-        var regexp = /^\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})$/;
-        return {
-            test: function(value) {
-                if( $scope.requireTel === false ) {
-                    return true;
-                }
-                return regexp.test(value);
-            }
-    };
-})();
+    $scope.cancel = function() {
+        $scope.customers.push($scope.customer);
+        $scope.customer = {};
+        $scope.editing = false;
+    }
         
 
 }]);

@@ -28,6 +28,7 @@ block content
                     input.form-control#inputName(type="number" placeholder="Enter zip" ng-model="customer.adress.zip")
             span.label.label-default#info * - required fields
             button.btn.btn-default(ng-click="add()" ng-disabled="inputForm.$invalid") Save
+             button.btn.btn-default(ng-click="cancel()" ng-disabled="inputForm.$invalid") Cancel
         div#output-table
             h2 Cutomer list
             table.table.table-striped
@@ -45,5 +46,5 @@ block content
                     td {{one.email}}
                     td {{one.adress.state + ", " + one.adress.city + ", " +one.adress.street + ", " +one.adress.zip}}
                     td
-                        button.btn.btn-default(ng-click="delete(one)") Delete
-                        button.btn.btn-default(ng-click="edit(one)") Edit
+                        button.btn.btn-default(ng-click="delete(one)"  ng-disabled="editing") Delete
+                        button.btn.btn-default(ng-click="edit(one)"  ng-disabled="editing") Edit
