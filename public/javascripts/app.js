@@ -36,7 +36,8 @@ myApp.controller('AppController', ['$scope', '$http',function ($scope, $http) {
     };
     
     $scope.delete = function(one) {
-        
+        if($scope.editing)
+            $scope.cancel();
         var index = $scope.customers.indexOf(one);
         $scope.customers.splice(index, 1);
         console.log(one.id);
@@ -51,6 +52,8 @@ myApp.controller('AppController', ['$scope', '$http',function ($scope, $http) {
     }
     
     $scope.edit = function(one) {
+        if($scope.editing)
+            $scope.cancel();
         $scope.customer = one;
         $scope.editing = true;
         var index = $scope.customers.indexOf(one);

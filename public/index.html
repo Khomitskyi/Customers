@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Express</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-theme.min.css">
+</head>
+
+<body>    
+    <div ng-app="App" ng-controller="AppController">
+        <h1 id="main-header">Customer base</h1>
+        <div id="customer-input">
+            <h2 ng-show="!editing">New contact</h2>
+            <h2 ng-show="editing">Editing contact</h2>
+            <form name="inputForm">
+                <div class="form-group">
+                    <label for="inputName">*Name</label>
+                    <input id="inputName" type="text" placeholder="Enter name" ng-model="customer.name" required maxlength="32" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputSurname">*Surname</label>
+                    <input id="inputName" type="text" placeholder="Enter surname" ng-model="customer.surname" required maxlength="32" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputPhone">*Phone</label>
+                    <input id="inputName" type="number" placeholder="Enter phone" ng-model="customer.phone" required maxlength="14" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">*Email</label>
+                    <input id="inputName" type="email" placeholder="Enter email" ng-model="customer.email" required maxlength="32" class="form-control">
+                </div>
+            </form><span id="info" class="label label-default">* - required fields</span>
+            <button ng-click="add()" ng-show="!inputForm.$invalid" class="btn btn-default">Save</button>
+            <button ng-click="cancel()" ng-show="!inputForm.$invalid" class="btn btn-default">Cancel</button>
+        </div>
+        <div id="output-table">
+            <h2>Cutomer list</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+                <tr ng-repeat="one in customers | orderBy:'id' track by $index ">
+                    <td>{{one.id}}</td>
+                    <td>{{one.name}}</td>
+                    <td>{{one.surname}}</td>
+                    <td>{{one.phone}}</td>
+                    <td>{{one.email}}</td>
+                    <td>
+                        <button ng-click="delete(one)" class="btn btn-default">Delete</button>
+                        <button ng-click="edit(one)" class="btn btn-default">Edit</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/app.js"></script>
+</body>
+
+</html>
